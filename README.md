@@ -1,1 +1,0 @@
-# aternos-afkbot-fire
