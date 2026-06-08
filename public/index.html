@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA AFK CORE v3.0 - Premium Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>NEBULA AFK CORE</h1>
+                <p>v3.0 Premium Dashboard</p>
+            </div>
+            <div class="login-form">
+                <input type="password" id="passwordInput" placeholder="Enter Dashboard Password" class="password-input">
+                <button onclick="authenticate()" class="login-button">UNLOCK DASHBOARD</button>
+                <p class="login-error" id="loginError"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard" style="display: none;">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <h1>NEBULA AFK CORE v3.0</h1>
+                <span class="status-indicator" id="statusIndicator">● OFFLINE</span>
+            </div>
+            <div class="header-actions">
+                <button onclick="logoutDashboard()" class="logout-btn">LOGOUT</button>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Panel 1: Status Overview -->
+            <div class="panel status-panel">
+                <div class="panel-header">📡 BOT STATUS</div>
+                <div class="status-content">
+                    <div class="status-item">
+                        <span>Server</span>
+                        <span id="serverDisplay" class="value">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Username</span>
+                        <span id="usernameDisplay" class="value">-</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Uptime</span>
+                        <span id="uptimeDisplay" class="value">00:00:00</span>
+                    </div>
+                    <div class="status-item">
+                        <span>Logged In</span>
+                        <span id="loginStatusDisplay" class="value">NO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2: Control Center -->
+            <div class="panel control-panel">
+                <div class="panel-header">🎮 CONTROL CENTER</div>
+                <div class="control-buttons">
+                    <button onclick="sendCommand('startBot')" class="btn btn-success">▶ START</button>
+                    <button onclick="sendCommand('stopBot')" class="btn btn-danger">⏹ STOP</button>
+                    <button onclick="sendCommand('restartBot')" class="btn btn-warning">🔄 RESTART</button>
+                    <button onclick="sendCommand('forceLogin')" class="btn btn-info">🔑 FORCE LOGIN</button>
+                    <button onclick="sendCommand('toggleAFK')" class="btn btn-primary">🧘 TOGGLE AFK</button>
+                </div>
+            </div>
+
+            <!-- Panel 3: Live Stats -->
+            <div class="panel stats-panel">
+                <div class="panel-header">📊 LIVE STATISTICS</div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Ping</div>
+                        <div id="pingDisplay" class="stat-value">-ms</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Memory</div>
+                        <div id="memoryDisplay" class="stat-value">-MB</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Reconnects</div>
+                        <div id="reconnectsDisplay" class="stat-value">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Chat Msgs</div>
+                        <div id="messagesDisplay" class="stat-value">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Movements</div>
+                        <div id="movementsDisplay" class="stat-value">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 4: Activity Log -->
+            <div class="panel activity-panel">
+                <div class="panel-header">📝 ACTIVITY LOG</div>
+                <div class="activity-log" id="activityLog">
+                    <div class="log-entry">Waiting for activity...</div>
+                </div>
+            </div>
+
+            <!-- Panel 5: Behavior Settings -->
+            <div class="panel settings-panel">
+                <div class="panel-header">🧠 AI BEHAVIOR SETTINGS</div>
+                <div class="settings-content">
+                    <div class="setting-item">
+                        <label>Movement Randomness</label>
+                        <input type="range" min="0" max="100" value="80" class="slider">
+                        <span id="movementValue" class="slider-value">80%</span>
+                    </div>
+                    <div class="setting-item">
+                        <label>Chat Frequency</label>
+                        <input type="range" min="0" max="100" value="70" class="slider">
+                        <span id="chatValue" class="slider-value">70%</span>
+                    </div>
+                    <div class="setting-item">
+                        <label>Human-like Delay</label>
+                        <input type="range" min="0" max="100" value="90" class="slider">
+                        <span id="delayValue" class="slider-value">90%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 6: Uptime Chart -->
+            <div class="panel chart-panel">
+                <div class="panel-header">📈 UPTIME CHART</div>
+                <canvas id="uptimeChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
